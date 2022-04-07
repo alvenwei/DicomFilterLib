@@ -67,6 +67,7 @@ def dcm_filter(dicom: Dict, key_value_pairs: List[Tuple[str, str]]) -> bool:
             Raises:
                     KeyError: if the key doesn't exist in the dicom dict
                     ValueError: if the value doesnt match in the dicom dict
+                    TypeError: if the type of key_value_pairs is incorrect
     """
     if not dicom:
         return False
@@ -77,7 +78,7 @@ def dcm_filter(dicom: Dict, key_value_pairs: List[Tuple[str, str]]) -> bool:
             if value not in dicom[key]["Value"]:
                 raise ValueError(f"No match for value: {value}")
             result = True
-    except (KeyError, ValueError):
+    except (KeyError, ValueError, TypeError):
         result = False
     return result
 
